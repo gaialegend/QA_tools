@@ -1,0 +1,29 @@
+<title>item_search</title>
+<form method='POST' action=''>
+<!-- 	{% if item_type == 2 %}
+	{% for key in item_name %}
+	{{ key }}:{{ item_name[key] }}<br/>
+	{% endfor %}
+	{% else %}
+	{{ item_name }}<br/>
+	{% endif %} -->
+	hello<br/>
+	{% if item_type == 0 %}
+
+	{% for x in item_name %}
+<!-- 	{{ x['name'] }}
+	{{ x['id']}}
+	{{ x['type']}}<br/> -->
+	------------------------------------<br/>
+	{% for key in x %}
+	
+	{{ key }}: {{ x[key]}}<br/>
+	{% endfor %}
+	------------------------------------<br/>
+	{% endfor %}
+	{% endif %}
+	{{ form.hidden_tag() }}
+	{{ form.item.label }}:{{ form.item() }}
+	<input type='submit' value='查询'><br/>
+</form>
+<a href ='/'>返回首页</a><br/>

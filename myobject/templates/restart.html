@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>restart</title>
+</head>
+<body>
+<h3>操作完成</h3>
+<h3>打印结果:</h3>
+{% if fuction ==1 %}
+	<h5>230:主干服务器时间</h5>
+	<h5>{{ result }}</h5>
+	<h5>229:分支服务器时间</h5>
+	<h5>{{ result2 }}</h5>
+	<a href='/time/switch'>调整229时间</a>
+	<a href='/time/switch_time_230'>调整230时间</a>
+{% else %}
+	<h5>重启情况</h5><br/>
+	<h5>{{ result }}</h5>
+{% endif %}
+<a href='/'>返回首页</a>
+</body>
+</html>

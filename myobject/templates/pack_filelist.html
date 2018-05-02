@@ -1,0 +1,6 @@
+<title>下载包列表</title>
+<form method='POST' action=''>
+	{% for key in pack_dic %}
+	<a href={{pack_dic[key]}}>{{ key }}</a><br/>
+	{% endfor %}
+<a href ='/'>返回首页</a><br/>

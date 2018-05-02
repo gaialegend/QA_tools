@@ -1,0 +1,14 @@
+
+{% import "bootstrap/wtf.html" as wtf %}  
+{% block title %}Time{% endblock %}  
+{% block page_content %}  
+{{ wtf.quick_form(form) }}
+{% if platform == '230' %}
+	<h5>230服务器</h5>
+{% else %}
+	<h5>229服务器</h5>
+{% endif %}
+<h4>{{ server_time }}</h4>
+<a href='/time'>返回时间页面</a>
+<a href='/'>返回首页</a>
+{% endblock %}  

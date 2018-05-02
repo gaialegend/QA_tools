@@ -1,0 +1,10 @@
+<form method='POST' action='/test_tool/rollcard'>
+	{{ form.hidden_tag() }}
+	{{ form.csrf_token }}
+	{{ form.role_id.label }}:{{ form.role_id() }}
+	{{ form.server.label }}:{{ form.server() }}
+	{{ form.card_pool.label }}:{{ form.card_pool() }}
+	{{ form.roll_choise.label }}:{{ form.roll_choise() }}
+	{{ form.count.label }}：{{ form.count() }}
+	<input type='submit' value='提交'>
+</form>

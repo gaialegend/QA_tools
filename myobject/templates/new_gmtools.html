@@ -1,0 +1,8 @@
+<form method='POST' action=''>
+	{{ form.hidden_tag() }}
+	{{ form.role_id.label }}:{{ form.role_id() }}
+	{{ form.server.label }}:{{ form.server() }}
+	{{ form.user_level.label}}:{{ form.user_level()}}
+	<input type='submit' value='提交'>
+</form>
+<a href='/'>返回首页</a>

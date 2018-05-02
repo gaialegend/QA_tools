@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<form method='POST' action='/restart_new'>
+	{{ form.hidden_tag() }}
+	{{ form.csrf_token }}
+	{{ form.server.label }}:{{ form.server() }}
+	<input type='submit' value='提交'><br/>
+	<a href='/'>返回首页</a>
+</form>
