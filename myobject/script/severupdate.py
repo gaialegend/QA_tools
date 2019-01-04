@@ -4,13 +4,13 @@ import paramiko
 import re
 import json
 import os
-ip = '115.182.192.229'
+ip = '109.244.1.51'
 port = 22
 
-_ip = '115.182.192.230'
+_ip = '109.244.1.50'
 
 
-ip_dic = {'server_1':'115.182.192.230','server_2':'115.182.192.229','server_800':'139.199.165.219','inter_server':'115.182.192.229'}
+ip_dic = {'server_1':'109.244.1.50','server_2':'109.244.1.51','server_800':'139.199.165.219','inter_server':'115.182.192.229'}
 filename = 'bin.zip'
 
 def restartserver(server):

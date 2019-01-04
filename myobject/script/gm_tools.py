@@ -8,8 +8,8 @@ import time
 
 class Gmtools(object):
 	def __init__(self):
-		self.ip = "http://115.182.192.229:50280/gd?"
-		self._ip = "http://115.182.192.230:50180/gd?"
+		self.ip = "http://109.244.1.51:50280/gd?"
+		self._ip = "http://109.244.1.50:50180/gd?"
 		self._800_ip = "http://139.199.165.219:50080/gd?"
 		self.param1 = "gs"
 		self.card_list = ['6001',
@@ -66,7 +66,12 @@ class Gmtools(object):
 							'6047',
 							'6057',
 							'6058',
-							'6059']
+							'6059',
+							'6072',
+							'6083',
+							'6084',
+							'6067',
+							'6068']
 
 		self.add_produce_count = {
 							    1200 : 10000,
@@ -116,7 +121,13 @@ class Gmtools(object):
 							    1801 : 10000,
 							    1802 : 10000,
 							    1803 : 10000,
-							    1804 : 10000
+							    1804 : 10000,
+							    1600 : 10000,
+							    1601 : 10000,
+							    1602 : 10000,
+							    1603 : 10000,
+							    1604 : 10000,
+							    1605 : 10000
 								}
 		self.help_task_list = [
 					6001,
@@ -210,8 +221,9 @@ class Gmtools(object):
 			# p.apply_async(self.order,args=(roleid,'task_passed',str(x),server,'2'))
 		return
 
-	def set_dup_process(self,roleid,server):
-		self.order(roleid,'set_dup_progress','20635',server)
+	def set_dup_process(self,roleid,server,dupid):
+		self.order(roleid,'set_dup_progress',dupid,server)
+		return 
 
 
 	def create_all_item(self,roleid,server):
@@ -233,26 +245,102 @@ class Gmtools(object):
 		self.add_startstone(roleid,server)
 		self.set_money(roleid,'1','999999999',server)
 		self.set_money(roleid,'2','999999999',server)
-		self.set_dup_process(roleid,server)
+		self.set_dup_process(roleid,server,'10640') #临时修改
 		self.clear_help_task(roleid,server)
 		for prod in item_dic:
 			self.order(roleid,'create_item',str(prod),server,str(item_dic[prod]))
 		return
 
 
-	def clear_dup_task(self,roleid,server):
-		dup_task = range(1002001,1002049)
+	def clear_dup_task(self,roleid,server,duptask=range(1002001,1002049),switch='2'):
+		dup_task = duptask
 		for x in dup_task:
-			self.order(roleid,'task_passed',str(x),server,'2')
+			self.order(roleid,'task_passed',str(x),server,switch)
 			time.sleep(3)
 		return
 
-
-
-
+	def set_quest_activity(self,roleid,server,duptask,switch='2'):
+		dup_task = duptask
+		for x in dup_task:
+			self.order(roleid,'set_quest_activity',str(x),server,switch)
+		return 
 if __name__ == '__main__':
 	tar = Gmtools()
 	#tar.create_all_item('8000000036','server_800')
 	#tar.super_man('9940042518','server_1','56')
 	#tar.clear_help_task('9940042560','server_1')
-	tar.clear_dup_task('9940051419','server_1')
+	#tar.clear_dup_task('9940051419','server_1')
+	tar.set_quest_activity('9940000027','server_1',[5101,
+5102,
+5103,
+5104,
+5105,
+5106,
+5107,
+5108,
+5109,
+5110,
+5111,
+5201,
+5202,
+5203,
+5204,
+5205,
+5206,
+5207,
+5208,
+5209,
+5210,
+5211,
+5212,
+5301,
+5302,
+5303,
+5304,
+5305,
+5306,
+5307,
+5308,
+5309,
+5310,
+5401,
+5402,
+5403,
+5404,
+5405,
+5406,
+5407,
+5408,
+5409,
+5410,
+5501,
+5502,
+5503,
+5504,
+5505,
+5506,
+5507,
+5508,
+5509,
+5510,
+5601,
+5602,
+5603,
+5604,
+5605,
+5606,
+5607,
+5608,
+5609,
+5610,
+5701,
+5702,
+5703,
+5704,
+5705,
+5706,
+5707,
+5708,
+5709,
+5710,
+5711],'3')

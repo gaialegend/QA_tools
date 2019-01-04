@@ -9,7 +9,7 @@ class rollcard(gm_tools.Gmtools):
 	def __init__(self):
 		gm_tools.Gmtools.__init__(self)
 
-	def rollcard_post(self,role_id,count,_type,pool,server):
+	def rollcard_post(self,role_id,count,_type,pool,server,step=0):
 		#钻石单抽 0
 		#抽奖券抽 1
 		#十连抽 2
@@ -23,7 +23,7 @@ class rollcard(gm_tools.Gmtools):
 		# 	]
 		sign = '%7C'
 		_ip = {'server_1':self._ip,'server_2':self.ip}
-		api = _ip[server] + 'mod=0&id=0&comm=rollcard'+sign+role_id+sign+str(pool)+sign+str(_type)+sign+count
+		api = _ip[server] + 'mod=0&id=0&comm=rollcard'+sign+role_id+sign+str(pool)+sign+str(_type)+sign+count+sign+step
 		print api
 		response = requests.get(api)
 		res = response.json()
@@ -33,7 +33,7 @@ class rollcard(gm_tools.Gmtools):
 		print res
 		dic_res = eval(res)
 		#print type(dic_res)
-		if str(_type) == '2':
+		if str(_type) == '2' or (_type) == '3':
 			count = int(count) * 10
 		filename = csv2name.report(dic_res,count)
 		return filename

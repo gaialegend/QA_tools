@@ -3,6 +3,7 @@
 import csv
 import xml.dom.minidom
 import time
+import Itemdata
 from decimal import Decimal
 from decimal import getcontext
 import sys
@@ -27,6 +28,21 @@ def xml2dic(filename):
 		card_name_dic[x.getAttribute('id')] = x.getAttribute('text')
 	return card_name_dic
 
+# def xml2dic_dup(filename):
+# 	dup_name_dic = {}
+# 	DomTree = xml.dom.minidom.parse(filename)
+# 	collection = DomTree.documentElement
+# 	dup_name = collection.getElementsByTagName("")
+
+def get_item_detail():
+	with open('item_consumable_cs','rb') as itemconsumable:
+		item_dic = xml2dic('disstr_item.xml')
+		reader = csv.reader(itemconsumable)
+		for i in reader:
+			item_detail = Itemdata()
+
+	pass
+
 
 def get_card_name(card_id):
 	name_dic = {}
@@ -49,6 +65,61 @@ def get_card_name(card_id):
 	print str(card_name)
 	print type(str(card_name))
 	return str(card_name)
+
+def get_dup_name(dup_id=None):
+	name_dic = {}
+	dup_dic = {}
+
+	with open('map_duplicate_cs.csv','r') as dup_csvfile:
+		reader = csv.reader(dup_csvfile)
+		for i in reader:
+			name_dic[i[0]] =i[3]
+	with open('multiple_duplicate_cs.csv','r') as multdup_csvfile:
+		reader = csv.reader(multdup_csvfile)
+		for i in reader:
+			name_dic[i[0]] = i[1]
+	dup_dic = xml2dic('disstr_dup.xml')
+	#print dup_dic
+
+	if dup_id != None:
+		try:
+			print type(dup_id)
+			#print name_dic[dup_id]
+			#print dup_dic[name_dic[dup_id]]
+			return [{'id':dup_id,'dup_name':dup_dic[name_dic[dup_id]]}]
+		except KeyError:
+			print '---------------------------------------'
+			try:
+				dup_dic_turn = {value:key for key,value in dup_dic.items()}
+				#name_dic_turn = {value:key for key,value in name_dic.items()}
+				dup_li = []
+				for x in dup_dic_turn.keys():
+					#print x
+					if dup_id in x or dup_id == x:
+						#print name_dic_turn[dup_dic_turn[x]]
+						#print list(name_dic.values())
+						print dup_dic_turn[x]
+						#print dup_dic_turn[x] in list(name_dic.values())
+						print '----------------------------------------'
+						#print list(name_dic.values()).index(dup_dic_turn[x])
+						try:
+							print x
+							result = {x:list(name_dic.keys())[list(name_dic.values()).index(dup_dic_turn[x])]}
+							dup_li.append(result)
+						except ValueError,e:
+							print e
+							continue
+				print dup_li
+				return dup_li
+			#print 'oops'
+			#print name_dic
+			except (),e:
+				print e.message
+				print 'oops'
+				return None
+	else:
+		print name_dic
+	return None
 
 def get_card_rank(card_id):
 	rank_dic = {}
@@ -127,6 +198,8 @@ def get_item_dic():
 	#print item_dic
 	#print type(item_dic)
 	return item_dic
+
+ 
 
 # def get_item_name(element):
 # 	xml2name = get_item_name_dic()
@@ -241,4 +314,5 @@ def get_item_id(name):
 
 
 if __name__ == '__main__':
+	get_dup_name('魔能机甲')
 	pass
